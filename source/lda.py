@@ -36,11 +36,11 @@ class LDA(object):
         dependent file. Also, the document must has been tokenize and stop words were moved. And the character between
         two words is the parameter: sep.
         This method calls an function of corpus.
-        :param directory:the name of directory, which contains documents.
-        :param key_word_list:the string the must appeared in the name of document. Default value is None.
-        :param no_key_word_list:the string the must not appeared in the name of document. Default value is None.
-        :param sep:the character between two words in document. Default value is blank space.
-        :return:nothing.
+        :param directory: the name of directory, which contains documents.
+        :param key_word_list: the string the must appeared in the name of document. Default value is None.
+        :param no_key_word_list: the string the must not appeared in the name of document. Default value is None.
+        :param sep: the character between two words in document. Default value is blank space.
+        :return: nothing.
         """
         self.corpus.load_directory_corpus(directory=directory, key_word_list=key_word_list,
                                           no_key_word_list=no_key_word_list,sep=sep)

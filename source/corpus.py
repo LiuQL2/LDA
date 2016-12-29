@@ -19,21 +19,25 @@ class Corpus(object):
         """
         Initialize an instance.
         """
-        self.documents = {} #documents in the corpus, whose key is the index of document and value is the word of the document.
-        self.documents_name_dict = {} # name dictionary of documents. key:index of document, value:name of document.
-        self.word_id = {} #vocabulary. key:word, value:word id.
-        self.id_word = {}#vocabulary. key:word id, value:word.
+        # documents in the corpus, key: id of document, value: list of id of all words in document..
+        self.documents = {}
+        # name of documents. key:id of document, value:name of document.
+        self.documents_name_dict = {}
+        # vocabulary. key:word, value:word id.
+        self.word_id = {}
+        # vocabulary. key:word id, value:word.
+        self.id_word = {}
 
     def load_directory_corpus(self, directory,sep=' ',key_word_list=None, no_key_word_list=None):
         """
         The method to load corpus from directory, which contains the documents. And each document in the directory is an
         dependent file. Also, the document must has been tokenize and stop words were moved. And the character between
         two words is the parameter: sep.
-        :param directory:the name of directory, which contains documents.
-        :param sep:the character between two words in document. Default value is blank space.
-        :param key_word_list:the string the must appeared in the name of document. Default value is None.
-        :param no_key_word_list:the string the must not appeared in the name of document. Default value is None.
-        :return:nothing.
+        :param directory: the name of directory, which contains documents.
+        :param sep: the character between two words in document. Default value is blank space.
+        :param key_word_list: the string the must appeared in the name of document. Default value is None.
+        :param no_key_word_list: the string the must not appeared in the name of document. Default value is None.
+        :return: nothing.
         """
         document_name_list = self.get_dirlist(path=directory,key_word_list=key_word_list,
                                               no_key_word_list=no_key_word_list)
@@ -51,9 +55,9 @@ class Corpus(object):
         The method that load corpus from one file, which contains all documents and whose one line corresponds to one
         document. Also, document must be tokenize and stop words are moved. And the character between two words is the
         parameter: sep.
-        :param corpus_file:The file that contains all documents. It is the specific location where the file is.
-        :param sep:the character between two words in document. Default value is blank space.
-        :return:Nothing
+        :param corpus_file: The file that contains all documents. It is the specific location where the file is.
+        :param sep: the character between two words in document. Default value is blank space.
+        :return: Nothing
         """
         file = open(corpus_file,mode='r')
         index = 0

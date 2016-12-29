@@ -97,7 +97,7 @@ class GibbsSampler(object):
         """
         The method that changes topic assigned to the n th word of document m.
         :param m: document m.
-        :param n: sequence of word.
+        :param n: sequence of word in document m.
         :return: Nothing.
         """
         # topic assigned to this word before.
@@ -111,8 +111,10 @@ class GibbsSampler(object):
         # full conditional distribution of this word.
         full_condition_probability = []
         for k in range(0, self.topic_number, 1):
-            phi = (self.topic_term_count_matrix[k][self.documents[m][n]] + self.beta[self.documents[m][n]]) / (self.sum_topic_by_term_count[k] + self.sum_beta)
-            theta = (self.document_topic_count_matrix[m][k] + self.alpha[k]) / (self.sum_document_by_topic_count[m] + self.sum_alpha)
+            phi = (self.topic_term_count_matrix[k][self.documents[m][n]] + self.beta[self.documents[m][n]]) /\
+                  (self.sum_topic_by_term_count[k] + self.sum_beta)
+            theta = (self.document_topic_count_matrix[m][k] + self.alpha[k]) /\
+                    (self.sum_document_by_topic_count[m] + self.sum_alpha)
             probability = phi * theta
             full_condition_probability.append(probability)
         # cumulating the full conditional distribution.
@@ -168,10 +170,12 @@ class GibbsSampler(object):
         """
         for m in range(0, self.document_number, 1):
             for k in range(0, self.topic_number, 1):
-                self.document_distribution_over_topic[m][k] += ((self.document_topic_count_matrix[m][k] + self.alpha[k]) / (self.sum_document_by_topic_count[m] + self.sum_alpha))
+                self.document_distribution_over_topic[m][k]+=((self.document_topic_count_matrix[m][k] + self.alpha[k])
+                                                              / (self.sum_document_by_topic_count[m] + self.sum_alpha))
         for k in range(0, self.topic_number, 1):
             for v in range(0, self.term_number,1):
-                self.topic_distribution_over_term[k][v] += ((self.topic_term_count_matrix[k][v] + self.beta[v]) / (self.sum_topic_by_term_count[k] + self.sum_beta))
+                self.topic_distribution_over_term[k][v] += ((self.topic_term_count_matrix[k][v] + self.beta[v]) / \
+                                                            (self.sum_topic_by_term_count[k] + self.sum_beta))
         # the number of times that the distributions are updated.
         self.update_number += 1
 
